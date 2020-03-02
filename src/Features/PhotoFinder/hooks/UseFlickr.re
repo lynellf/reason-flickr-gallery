@@ -33,18 +33,16 @@ type state =
   | Done(photos);
 
 type events =
-  | GetData(string)
   | ResolveData(photos)
   | HandleErr
   | Submit(string);
 
 let updateState = (event, state) => {
   switch (event, state) {
-  | (GetData(url), _) => Loading(url)
-  | (ResolveData(photos), _) => Done(photos)
-  | (HandleErr, _) => Error
   | (Submit(_), Loading(url)) => Loading(url)
   | (Submit(url), _) => Loading(url)
+  | (ResolveData(photos), _) => Done(photos)
+  | (HandleErr, _) => Error
   };
 };
 
@@ -86,7 +84,6 @@ let make = (~apiKey: string) => {
       ++ query
       ++ "&per_page=16&format=json&nojsoncallback=1";
     ReactEvent.Form.preventDefault(event);
-    dispatch(Submit(url));
     ();
   };
 
