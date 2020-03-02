@@ -60,7 +60,9 @@ function make(apiKey) {
   var dispatch = match[1];
   var state = match[0];
   var handleSubmit = function (query, $$event) {
+    var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + (apiKey + ("&tags=" + (query + "&per_page=16&format=json&nojsoncallback=1")));
     $$event.preventDefault();
+    Curry._1(dispatch, /* Submit */Block.__(1, [url]));
     return /* () */0;
   };
   React.useEffect((function () {

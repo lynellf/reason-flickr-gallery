@@ -84,6 +84,9 @@ let make = (~apiKey: string) => {
       ++ query
       ++ "&per_page=16&format=json&nojsoncallback=1";
     ReactEvent.Form.preventDefault(event);
+
+    dispatch(Submit(url));
+
     ();
   };
 
